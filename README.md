@@ -1,0 +1,1 @@
+<h1>Petitions web application</h1>
