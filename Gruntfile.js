@@ -379,14 +379,24 @@ module.exports = function (grunt) {
     },
 
     // Test settings
+    // Unit testing 
     karma: {
       unit: {
         configFile: 'test/karma.conf.js',
         singleRun: true
       }
+    },
+    // e2e testing
+    protractor: {
+      options: {
+        singlerun: true,
+        configFile: 'test/protractor.conf.js'
+      },
+      singlerun: {}
     }
   });
 
+  grunt.loadNpmTasks('grunt-protractor-runner');
 
   grunt.registerTask('serve', 'Compile then start a connect web server', function (target) {
     if (target === 'dist') {
@@ -413,7 +423,8 @@ module.exports = function (grunt) {
     'concurrent:test',
     'autoprefixer',
     'connect:test',
-    'karma'
+    'karma',
+    'protractor:singlerun'
   ]);
 
   grunt.registerTask('build', [
