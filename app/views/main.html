@@ -1,23 +1,20 @@
-<div class="jumbotron">
-  <h1>'Allo, 'Allo!</h1>
-  <p class="lead">
-    <img src="images/yeoman.png" alt="I'm Yeoman"><br>
-    Always a pleasure scaffolding your apps.
-  </p>
-  <p><a class="btn btn-lg btn-success" ng-href="#">Splendid!<span class="glyphicon glyphicon-ok"></span></a></p>
-</div>
 
-<div class="row marketing">
-  <h4>HTML5 Boilerplate</h4>
-  <p>
-    HTML5 Boilerplate is a professional front-end template for building fast, robust, and adaptable web apps or sites.
-  </p>
+<h1>victories</h1>
 
-  <h4>Angular</h4>
-  <p>
-    AngularJS is a toolset for building the framework most suited to your application development.
-  </p>
+<carousel class="col-xs-10 col-xs-offset-1">
+  <slide ng-repeat="victory in victories" active="victory.active" class="petition-container row slide-size" >
+  	<div class="image-container col-xs-5">
+  		<img ng-src="{{victory.img}}" alt="{{victory.title}}">
+  	</div>
+  	<div class="col-xs-7">
+  		<h3>{{victory.title}}</h3>
+  		<p>{{victory.msg}}</p>
+  		<div class="details-container row">
+  			<div class="col-md-6">{{victory.username}}</div>
+  			<div class="col-md-3">{{victory.signatures}}</div>
+  			<div class="col-md-3">{{victory.date | date}}</div>
+  		</div>
+  	</div>
+  </slide>
+</carousel>
 
-  <h4>Karma</h4>
-  <p>Spectacular Test Runner for JavaScript.</p>
-</div>

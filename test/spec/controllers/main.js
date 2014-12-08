@@ -2,21 +2,47 @@
 
 describe('Controller: MainCtrl', function () {
 
-  // load the controller's module
-  beforeEach(module('petitionsorgApp'));
 
-  var MainCtrl,
-    scope;
+  var $scope,
+    MainCtrl,
+    $controller,
+    vicSvc,
+    mockVictService;
 
-  // Initialize the controller and a mock scope
-  beforeEach(inject(function ($controller, $rootScope) {
-    scope = $rootScope.$new();
-    MainCtrl = $controller('MainCtrl', {
-      $scope: scope
+  beforeEach(function() {
+
+    jasmine.getJSONFixtures().fixturesPath='base/test/mock';
+
+    mockVictService = {};
+
+    module('petitionsorgApp', function($provide) {
+      $provide.value('victoriesService', mockVictService);
     });
+
+    inject(function($q) {
+
+      mockVictService.data = getJSONFixture('lastVictories.json');
+
+      mockVictService.lasts = function() {
+        var defer = $q.defer();
+
+        defer.resolve(this);
+
+        return defer.promise;
+      };
+    });
+  });
+
+    // Initialize the controller and a mock scope
+  beforeEach(inject(function (_$controller_, victoriesService, $rootScope) {
+    $scope = $rootScope.$new();
+    vicSvc = victoriesService;
+    $controller = _$controller_;
+    MainCtrl = $controller('MainCtrl', { $scope: $scope , victoriesService: vicSvc });
+    $scope.$digest();
   }));
 
-  it('should attach a list of awesomeThings to the scope', function () {
-    expect(scope.awesomeThings.length).toBe(3);
+  it('Should show the last 5 victories', function() {
+    expect($scope.victories.length).toBe(5);
   });
 });

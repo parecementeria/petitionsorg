@@ -8,10 +8,8 @@
  * Controller of the petitionsorgApp
  */
 angular.module('petitionsorgApp')
-  .controller('MainCtrl', function ($scope) {
-    $scope.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
-  });
+	.controller('MainCtrl', ['$scope', 'victoriesService', function ($scope, victoriesService) {
+		victoriesService.lasts().then(function(response) {
+			$scope.victories = response.data;
+		});
+	}]);

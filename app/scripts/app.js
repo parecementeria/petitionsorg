@@ -10,12 +10,13 @@
  */
 angular
   .module('petitionsorgApp', [
-    'ngAnimate',
+    // 'ngAnimate', commented beacuse compatibility problems whith ui.bootstrap
     'ngCookies',
     'ngResource',
     'ngRoute',
     'ngSanitize',
-    'ngTouch'
+    'ngTouch',
+    'ui.bootstrap'
   ])
   .config(function ($routeProvider) {
     $routeProvider
